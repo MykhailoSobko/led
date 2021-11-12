@@ -72,6 +72,7 @@ void Error_Handler(void);
 #define LEDBIT5_GPIO_Port GPIOA
 #define UButton_Pin GPIO_PIN_0
 #define UButton_GPIO_Port GPIOB
+#define UButton_EXTI_IRQn EXTI0_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

@@ -113,28 +113,60 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   int pressed = 0;
-   while (1)
-   {
+  while (1)
+  {
     if ( HAL_GPIO_ReadPin(UButton_GPIO_Port, UButton_Pin) )
     {
-     ++pressed;
-     HAL_Delay(50);
-     while( HAL_GPIO_ReadPin(UButton_GPIO_Port, UButton_Pin) )
-     {}
-     HAL_Delay(50);
+      ++pressed;
+      if (pressed == 6)
+          {
+            pressed = 0;
+          }
+      HAL_Delay(50);
+      while( HAL_GPIO_ReadPin(UButton_GPIO_Port, UButton_Pin) )
+      {}
+      HAL_Delay(50);
     }
 
-    if (pressed == 6)
+    if (pressed == 0)
     {
-      pressed = 0;
+      HAL_GPIO_TogglePin(LEDBIT0_GPIO_Port, LEDBIT0_Pin);
+      HAL_GPIO_WritePin(LEDBIT5_GPIO_Port, LEDBIT5_Pin, GPIO_PIN_RESET);
+    }
+    else if (pressed == 1)
+    {
+      HAL_GPIO_TogglePin(LEDBIT1_GPIO_Port, LEDBIT1_Pin);
+      HAL_GPIO_WritePin(LEDBIT0_GPIO_Port, LEDBIT0_Pin, GPIO_PIN_RESET);
+    }
+    else if (pressed == 2)
+    {
+      HAL_GPIO_TogglePin(LEDBIT2_GPIO_Port, LEDBIT2_Pin);
+      HAL_GPIO_WritePin(LEDBIT1_GPIO_Port, LEDBIT1_Pin, GPIO_PIN_RESET);
+    }
+    else if (pressed == 3)
+    {
+      HAL_GPIO_TogglePin(LEDBIT3_GPIO_Port, LEDBIT3_Pin);
+      HAL_GPIO_WritePin(LEDBIT2_GPIO_Port, LEDBIT2_Pin, GPIO_PIN_RESET);
+    }
+    else if (pressed == 4)
+    {
+      HAL_GPIO_TogglePin(LEDBIT4_GPIO_Port, LEDBIT4_Pin);
+      HAL_GPIO_WritePin(LEDBIT3_GPIO_Port, LEDBIT3_Pin, GPIO_PIN_RESET);
+    }
+    else if (pressed == 5)
+    {
+      HAL_GPIO_TogglePin(LEDBIT5_GPIO_Port, LEDBIT5_Pin);
+      HAL_GPIO_WritePin(LEDBIT4_GPIO_Port, LEDBIT4_Pin, GPIO_PIN_RESET);
     }
 
-    HAL_GPIO_WritePin(LEDBIT0_GPIO_Port, LEDBIT0_Pin, pressed == 0);
-    HAL_GPIO_WritePin(LEDBIT1_GPIO_Port, LEDBIT1_Pin, pressed == 1);
-    HAL_GPIO_WritePin(LEDBIT2_GPIO_Port, LEDBIT2_Pin, pressed == 2);
-    HAL_GPIO_WritePin(LEDBIT3_GPIO_Port, LEDBIT3_Pin, pressed == 3);
-    HAL_GPIO_WritePin(LEDBIT4_GPIO_Port, LEDBIT4_Pin, pressed == 4);
-    HAL_GPIO_WritePin(LEDBIT5_GPIO_Port, LEDBIT5_Pin, pressed == 5);
+    HAL_Delay(25*(pressed+1));
+
+//    HAL_GPIO_WritePin(LEDBIT0_GPIO_Port, LEDBIT0_Pin, pressed == 0);
+//    HAL_GPIO_WritePin(LEDBIT1_GPIO_Port, LEDBIT1_Pin, pressed == 1);
+//    HAL_GPIO_WritePin(LEDBIT2_GPIO_Port, LEDBIT2_Pin, pressed == 2);
+//    HAL_GPIO_WritePin(LEDBIT3_GPIO_Port, LEDBIT3_Pin, pressed == 3);
+//    HAL_GPIO_WritePin(LEDBIT4_GPIO_Port, LEDBIT4_Pin, pressed == 4);
+//    HAL_GPIO_WritePin(LEDBIT5_GPIO_Port, LEDBIT5_Pin, pressed == 5);
 
     /* USER CODE END WHILE */
 
